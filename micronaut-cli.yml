@@ -1,0 +1,6 @@
+applicationType: function
+defaultPackage: demo
+testFramework: spock
+sourceLanguage: kotlin
+buildTool: gradle
+features: [annotation-api, app-name, aws-lambda, gradle, kotlin, logback, readme, shade, spock, yaml]
