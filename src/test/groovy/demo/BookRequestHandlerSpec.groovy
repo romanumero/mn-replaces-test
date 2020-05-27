@@ -1,31 +1,28 @@
-package demo;
+package demo
+
+import io.micronaut.test.annotation.MicronautTest
 import spock.lang.AutoCleanup
 import spock.lang.Shared
 import spock.lang.Specification
-import demo.MyService
-import demo.MyServiceImpl
-import javax.inject.Inject
-import io.micronaut.test.annotation.MicronautTest
 
-@MicronautTest
+//@MicronautTest
 class BookRequestHandlerSpec extends Specification {
-
-    @Inject MyService myService
 
     @AutoCleanup
     @Shared
     BookRequestHandler bookRequestHandler = new BookRequestHandler()
 
+    @Shared
+    MyService myService = bookRequestHandler.applicationContext.getBean(MyService)
 
     void "test Handler"() {
         given:
-
+        myService.doStuff()
         Book book = new Book()
         book.name = 'Building Microservices'
 
         when:
         BookSaved bookSaved = bookRequestHandler.execute(book)
-        myService.doStuff()
 
         then: 'book name matches the one supplied'
         bookSaved.name == book.name
